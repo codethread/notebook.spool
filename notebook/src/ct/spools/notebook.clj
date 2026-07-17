@@ -8,13 +8,15 @@
 
 (defn capture!
   "Create an entry strand carrying `notebook.entry/text` and
-  `notebook.entry/on` (ISO date). Returns the entry id.
+  `notebook.entry/on`. Returns the entry id.
 
-  Fails loudly on blank text — an empty entry is never a sensible
-  default."
-  [runtime text]
+  Requires an explicit ISO `date` — the old implicit-today default is
+  gone. Fails loudly on blank text or missing date."
+  [runtime text date]
   ;; Sketch for ecosystem modeling: the real body registers via
   ;; skein.api.spool.alpha and validates against ::entry-text.
   (when (or (nil? text) (= "" text))
     (throw (ex-info "notebook entry text must be non-blank" {:text text})))
-  {:captured text :runtime (some? runtime)})
+  (when (nil? date)
+    (throw (ex-info "capture! requires an explicit date" {:date date})))
+  {:captured text :on date :runtime (some? runtime)})
