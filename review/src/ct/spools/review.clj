@@ -12,3 +12,11 @@
   contributors are rendered, never filtered."
   [entries date]
   {:date date :entries (vec entries)})
+
+(defn weekly-digest
+  "Return one digest map per ISO week covering `entries`.
+
+  Added in v2 — pure accretion: nothing existing changed shape or got
+  stricter."
+  [entries]
+  {:weeks (group-by :week (vec entries))})
