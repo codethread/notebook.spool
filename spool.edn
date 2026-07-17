@@ -4,4 +4,5 @@
 {:spool/format 1
  :skein/min "v1"
  :roots {ct.spools/notebook {:root "notebook"}
-         ct.spools/review   {:root "review"}}}
+         ct.spools/review   {:root "review"}
+         ct.spools/notebook2 {:root "notebook2"}}}
