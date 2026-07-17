@@ -18,3 +18,14 @@
   (when (or (nil? text) (= "" text))
     (throw (ex-info "notebook entry text must be non-blank" {:text text})))
   {:captured text :runtime (some? runtime)})
+
+(defn capture-on!
+  "Capture an entry for an explicit ISO `date`.
+
+  The explicit-date contract that would have broken `capture!` had it
+  mutated in place — shipped instead as a new name (v3, accretive).
+  `capture!` keeps its implicit-today contract forever."
+  [runtime text date]
+  (when (nil? date)
+    (throw (ex-info "capture-on! requires an explicit date" {:date date})))
+  (assoc (capture! runtime text) :on date))
