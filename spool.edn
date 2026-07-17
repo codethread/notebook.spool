@@ -1,0 +1,7 @@
+;; Advisory manifest — the package.el pattern: CLI helpers read this to
+;; prefill and update a consumer's spools.edn entry; the skein core loader
+;; never reads it. Trust and validation stay consumer-side.
+{:spool/format 1
+ :skein/min "v1"
+ :roots {ct.spools/notebook {:root "notebook"}
+         ct.spools/review   {:root "review"}}}
